@@ -1,6 +1,3 @@
-from common.constants import Constants
-
-
 def validate_resource(resource):
     if resource.resource_identifier is None:
         raise ValueError('Resource has no identifier')

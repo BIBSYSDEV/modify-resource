@@ -7,9 +7,9 @@ import boto3
 from boto3.dynamodb.conditions import Key
 from boto3_type_annotations.dynamodb import Table
 
-from common.constants import Constants
-from common.validator import validate_resource
-from data.resource import Resource
+from modify_resource.main.common.constants import Constants
+from modify_resource.main.common.validator import validate_resource
+from modify_resource.main.data.resource import Resource
 
 
 def response(status_code, body):

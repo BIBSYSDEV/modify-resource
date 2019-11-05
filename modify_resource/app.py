@@ -1,5 +1,5 @@
-from classes.RequestHandler import RequestHandler
-from common.constants import Constants
+from modify_resource.main.RequestHandler import RequestHandler
+from modify_resource.main.common.constants import Constants
 
 
 def handler(event, context):

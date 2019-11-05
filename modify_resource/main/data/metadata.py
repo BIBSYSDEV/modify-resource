@@ -1,6 +1,6 @@
 from typing import List
 
-from data.creator import Creator
+from modify_resource.main.data.creator import Creator
 
 
 class Metadata:
