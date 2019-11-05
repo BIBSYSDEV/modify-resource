@@ -1,7 +1,6 @@
 import http
 import json
 import os
-import uuid
 
 import arrow as arrow
 import boto3
