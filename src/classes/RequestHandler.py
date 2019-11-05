@@ -83,5 +83,5 @@ class RequestHandler:
                 return response(http.HTTPStatus.OK, json.dumps(ddb_response))
             except ValueError as e:
                 return response(http.HTTPStatus.BAD_REQUEST, e.args[0])
-        else:
-            return response(http.HTTPStatus.BAD_REQUEST, Constants.ERROR_INSUFFICIENT_PARAMETERS)
+
+        return response(http.HTTPStatus.BAD_REQUEST, Constants.ERROR_INSUFFICIENT_PARAMETERS)
