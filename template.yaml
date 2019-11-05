@@ -38,7 +38,7 @@ Resources:
   ModifyResource:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: ./src
+      CodeUri: ./modify_resource
       Handler: app.handler
       Runtime: python3.7
       Events:
