@@ -1,4 +1,0 @@
-{
-  "httpMethod": "POST",
-  "body":"{\"resource\": {\"owner\": \"owner@unit.no\", \"files\": {},\"metadata\": {\"titles\": {\"no\": \"En tittel\",\"en\": \"A title\"}}}}"
-}

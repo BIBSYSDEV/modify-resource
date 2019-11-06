@@ -1,4 +1,4 @@
-from modify_resource.main.data.file_metadata import FileMetadata
+from .file_metadata import FileMetadata
 
 
 class File:

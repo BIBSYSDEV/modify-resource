@@ -1,4 +1,4 @@
-from modify_resource.main.data.metadata import Metadata
+from .metadata import Metadata
 
 
 class Resource:

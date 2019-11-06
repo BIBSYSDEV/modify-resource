@@ -1,6 +1,11 @@
+import os
+import sys
+
+testdir = os.path.dirname(__file__)
+srcdir = '../'
+sys.path.insert(0, os.path.abspath(os.path.join(testdir, srcdir)))
 import http
 import json
-import os
 import random
 import string
 import unittest
@@ -11,7 +16,8 @@ from boto3.dynamodb.conditions import Key
 from moto import mock_dynamodb2
 
 from modify_resource.main.common.constants import Constants
-from modify_resource.main.common.encoders import encode_resource, encode_file_metadata, encode_files, encode_creator, encode_metadata
+from modify_resource.main.common.encoders import encode_resource, encode_file_metadata, encode_files, encode_creator, \
+    encode_metadata
 from modify_resource.main.common.helpers import remove_none_values
 from modify_resource.main.data.creator import Creator
 from modify_resource.main.data.file import File
@@ -423,6 +429,30 @@ class TestHandlerCase(unittest.TestCase):
         handler_response = app.handler(event, None)
         self.assertEqual(handler_response[Constants.RESPONSE_STATUS_CODE], http.HTTPStatus.BAD_REQUEST,
                          'HTTP Status code not 400')
+
+    def test_app_missing_env_region(self):
+        from modify_resource import app
+        _event = {
+            Constants.EVENT_HTTP_METHOD: Constants.HTTP_METHOD_POST,
+            "body": "{\"resource\": {}} "
+        }
+
+        del os.environ[Constants.ENV_VAR_REGION]
+        _handler_response = app.handler(_event, None)
+        self.assertEqual(_handler_response[Constants.RESPONSE_STATUS_CODE], http.HTTPStatus.INTERNAL_SERVER_ERROR,
+                         'HTTP Status code not 500')
+
+    def test_app_missing_env_table(self):
+        from modify_resource import app
+        _event = {
+            Constants.EVENT_HTTP_METHOD: Constants.HTTP_METHOD_POST,
+            "body": "{\"resource\": {}} "
+        }
+
+        del os.environ[Constants.ENV_VAR_TABLE_NAME]
+        _handler_response = app.handler(_event, None)
+        self.assertEqual(_handler_response[Constants.RESPONSE_STATUS_CODE], http.HTTPStatus.INTERNAL_SERVER_ERROR,
+                         'HTTP Status code not 500')
 
 
 if __name__ == '__main__':
