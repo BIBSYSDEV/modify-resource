@@ -15,16 +15,15 @@ import boto3
 from boto3.dynamodb.conditions import Key
 from moto import mock_dynamodb2
 
-from modify_resource.main.common.constants import Constants
-from modify_resource.main.common.encoders import encode_resource, encode_file_metadata, encode_files, encode_creator, \
-    encode_metadata
-from modify_resource.main.common.helpers import remove_none_values
-from modify_resource.main.data.creator import Creator
-from modify_resource.main.data.file import File
-from modify_resource.main.data.file_metadata import FileMetadata
-from modify_resource.main.data.metadata import Metadata
-from modify_resource.main.data.resource import Resource
-from modify_resource.main.data.title import Title
+from common.constants import Constants
+from common.encoders import encode_resource, encode_file_metadata, encode_files, encode_creator, encode_metadata
+from common.helpers import remove_none_values
+from data.creator import Creator
+from data.file import File
+from data.file_metadata import FileMetadata
+from data.metadata import Metadata
+from data.resource import Resource
+from data.title import Title
 
 
 def unittest_lambda_handler(event, context):
