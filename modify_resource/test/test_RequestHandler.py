@@ -153,6 +153,7 @@ class TestHandlerCase(unittest.TestCase):
         return Resource(uuid, time_modified, time_created, metadata, files, 'owner@unit.no')
 
     def test_handler_modify_resource(self):
+        print('test_handler_modify_resource')
         from modify_resource.main.RequestHandler import RequestHandler
         dynamodb = self.setup_mock_database()
         request_handler = RequestHandler(dynamodb)
@@ -164,6 +165,7 @@ class TestHandlerCase(unittest.TestCase):
         remove_mock_database(dynamodb)
 
     def test_handler_modify_resource_missing_resource_identifier(self):
+        print('test_handler_modify_resource_missing_resource_identifier')
         from modify_resource.main.RequestHandler import RequestHandler
         dynamodb = self.setup_mock_database()
         request_handler = RequestHandler(dynamodb)
