@@ -11,7 +11,6 @@ Metadata:
     LicenseUrl: LICENSE
     ReadmeUrl: README.md
     HomePageUrl: https://github.com/BIBSYSDEV/data-persistence
-    SemanticVersion: 0.0.1
     SourceCodeUrl: https://github.com/BIBSYSDEV/data-persistence
 
 Parameters:
@@ -30,7 +29,7 @@ Resources:
         PutEvent:
           Type: Api
           Properties:
-            Path: /resources/{id}
+            Path: /{id}
             Method: PUT
       Environment:
         Variables:
