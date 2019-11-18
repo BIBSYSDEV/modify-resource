@@ -33,5 +33,3 @@ Resources:
             Method: PUT
       Environment:
         Variables:
-          TABLE_NAME: !Ref ResourceTable
-          REGION: !Ref AWS::Region
