@@ -133,8 +133,10 @@ class TestHandlerCase(unittest.TestCase):
 
     def print_environment(self):
         print("Expecting environment varibles:")
-        print(Constants.ENV_VAR_REGION + " = " + os.environ.get(Constants.ENV_VAR_REGION))
-        print(Constants.ENV_VAR_TABLE_NAME + " = " + os.environ.get(Constants.ENV_VAR_TABLE_NAME))
+        print(Constants.ENV_VAR_REGION + " = ")
+        print(os.environ.get(Constants.ENV_VAR_REGION))
+        print(Constants.ENV_VAR_TABLE_NAME + " = ")
+        print(os.environ.get(Constants.ENV_VAR_TABLE_NAME))
 
     def generate_mock_resource(self, time_created=None, time_modified=None, uuid=uuid.uuid4().__str__()):
         title_1 = Title('no', self.random_word(6))
