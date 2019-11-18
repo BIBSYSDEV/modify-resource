@@ -131,6 +131,11 @@ class TestHandlerCase(unittest.TestCase):
         letters = string.ascii_lowercase
         return ''.join(random.choice(letters) for i in range(length))
 
+    def print_environment(self):
+        print("Expecting environment varibles:")
+        print(Constants.ENV_VAR_REGION + " = " + os.environ.get(Constants.ENV_VAR_REGION))
+        print(Constants.ENV_VAR_TABLE_NAME + " = " + os.environ.get(Constants.ENV_VAR_TABLE_NAME))
+
     def generate_mock_resource(self, time_created=None, time_modified=None, uuid=uuid.uuid4().__str__()):
         title_1 = Title('no', self.random_word(6))
         title_2 = Title('en', self.random_word(6))
@@ -152,6 +157,7 @@ class TestHandlerCase(unittest.TestCase):
         return Resource(uuid, time_modified, time_created, metadata, files, 'owner@unit.no')
 
     def test_handler_modify_resource(self):
+        self.print_environment()
         from modify_resource.main.RequestHandler import RequestHandler
         dynamodb = self.setup_mock_database()
         request_handler = RequestHandler(dynamodb)
@@ -163,6 +169,7 @@ class TestHandlerCase(unittest.TestCase):
         remove_mock_database(dynamodb)
 
     def test_handler_modify_resource_missing_resource_identifier(self):
+        self.print_environment()
         from modify_resource.main.RequestHandler import RequestHandler
         dynamodb = self.setup_mock_database()
         request_handler = RequestHandler(dynamodb)
@@ -175,6 +182,7 @@ class TestHandlerCase(unittest.TestCase):
         remove_mock_database(dynamodb)
 
     def test_handler_modify_resource_missing_resource_metadata_in_event_body(self):
+        self.print_environment()
         from modify_resource.main.RequestHandler import RequestHandler
         dynamodb = self.setup_mock_database()
         request_handler = RequestHandler(dynamodb)
@@ -187,6 +195,7 @@ class TestHandlerCase(unittest.TestCase):
         remove_mock_database(dynamodb)
 
     def test_handler_modify_resource_missing_resource_owner_in_event_body(self):
+        self.print_environment()
         from modify_resource.main.RequestHandler import RequestHandler
         dynamodb = self.setup_mock_database()
         request_handler = RequestHandler(dynamodb)
@@ -199,6 +208,7 @@ class TestHandlerCase(unittest.TestCase):
         remove_mock_database(dynamodb)
 
     def test_handler_modify_resource_missing_resource_files_in_event_body(self):
+        self.print_environment()
         from modify_resource.main.RequestHandler import RequestHandler
         dynamodb = self.setup_mock_database()
         request_handler = RequestHandler(dynamodb)
@@ -211,6 +221,7 @@ class TestHandlerCase(unittest.TestCase):
         remove_mock_database(dynamodb)
 
     def test_handler_modify_resource_empty_resource_metadata_in_event_body(self):
+        self.print_environment()
         from modify_resource.main.RequestHandler import RequestHandler
         dynamodb = self.setup_mock_database()
         request_handler = RequestHandler(dynamodb)
@@ -223,6 +234,7 @@ class TestHandlerCase(unittest.TestCase):
         remove_mock_database(dynamodb)
 
     def test_handler_modify_resource_invalid_resource_metadata_type_in_event_body(self):
+        self.print_environment()
         from modify_resource.main.RequestHandler import RequestHandler
         dynamodb = self.setup_mock_database()
         request_handler = RequestHandler(dynamodb)
@@ -240,6 +252,7 @@ class TestHandlerCase(unittest.TestCase):
         remove_mock_database(dynamodb)
 
     def test_handler_modify_resource_invalid_files_type_in_event_body(self):
+        self.print_environment()
         from modify_resource.main.RequestHandler import RequestHandler
         dynamodb = self.setup_mock_database()
         request_handler = RequestHandler(dynamodb)
@@ -257,6 +270,7 @@ class TestHandlerCase(unittest.TestCase):
         remove_mock_database(dynamodb)
 
     def test_handler_modify_resource_invalid_resource_identifier_field_json_in_event_body(self):
+        self.print_environment()
         from modify_resource.main.RequestHandler import RequestHandler
         dynamodb = self.setup_mock_database()
         request_handler = RequestHandler(dynamodb)
@@ -271,6 +285,7 @@ class TestHandlerCase(unittest.TestCase):
         remove_mock_database(dynamodb)
 
     def test_handler_modify_resource_unexpected_resource_field_in_event_body(self):
+        self.print_environment()
         from modify_resource.main.RequestHandler import RequestHandler
         dynamodb = self.setup_mock_database()
         request_handler = RequestHandler(dynamodb)
@@ -285,6 +300,7 @@ class TestHandlerCase(unittest.TestCase):
         remove_mock_database(dynamodb)
 
     def test_handler_modify_resource_created_date_missing_in_existing_resource(self):
+        self.print_environment()
         from modify_resource.main.RequestHandler import RequestHandler
         dynamodb = self.setup_mock_database()
         request_handler = RequestHandler(dynamodb)
@@ -299,6 +315,7 @@ class TestHandlerCase(unittest.TestCase):
         remove_mock_database(dynamodb)
 
     def test_handler_modify_resource_unknown_resource_identifier_in_event_body(self):
+        self.print_environment()
         from modify_resource.main.RequestHandler import RequestHandler
         dynamodb = self.setup_mock_database()
         request_handler = RequestHandler(dynamodb)
@@ -313,6 +330,7 @@ class TestHandlerCase(unittest.TestCase):
         remove_mock_database(dynamodb)
 
     def test_handler_unknown_http_method_in_event(self):
+        self.print_environment()
         from modify_resource.main.RequestHandler import RequestHandler
         dynamodb = self.setup_mock_database()
         request_handler = RequestHandler(dynamodb)
@@ -324,6 +342,7 @@ class TestHandlerCase(unittest.TestCase):
         remove_mock_database(dynamodb)
 
     def test_handler_missing_resource_in_event_body(self):
+        self.print_environment()
         from modify_resource.main.RequestHandler import RequestHandler
         dynamodb = self.setup_mock_database()
         request_handler = RequestHandler(dynamodb)
@@ -334,6 +353,7 @@ class TestHandlerCase(unittest.TestCase):
         remove_mock_database(dynamodb)
 
     def test_handler_missing_http_method_in_event_body(self):
+        self.print_environment()
         from modify_resource.main.RequestHandler import RequestHandler
         dynamodb = self.setup_mock_database()
         request_handler = RequestHandler(dynamodb)
@@ -345,6 +365,7 @@ class TestHandlerCase(unittest.TestCase):
         remove_mock_database(dynamodb)
 
     def test_handler_missing_event(self):
+        self.print_environment()
         from modify_resource.main.RequestHandler import RequestHandler
         dynamodb = self.setup_mock_database()
         request_handler = RequestHandler(dynamodb)
@@ -354,6 +375,7 @@ class TestHandlerCase(unittest.TestCase):
         remove_mock_database(dynamodb)
 
     def test_modify_resource(self):
+        self.print_environment()
         from modify_resource.main.RequestHandler import RequestHandler
         dynamodb = self.setup_mock_database()
         request_handler = RequestHandler(dynamodb)
@@ -420,6 +442,8 @@ class TestHandlerCase(unittest.TestCase):
         self.assertRaises(TypeError, encode_resource, '')
 
     def test_app(self):
+        self.print_environment()
+
         from modify_resource import app
         self.assertRaises(ValueError, app.handler, None, None)
         event = {
@@ -430,6 +454,8 @@ class TestHandlerCase(unittest.TestCase):
                          'HTTP Status code not 400')
 
     def test_app_missing_env_region(self):
+        self.print_environment()
+
         from modify_resource import app
         _event = {
             Constants.EVENT_HTTP_METHOD: Constants.HTTP_METHOD_POST,
@@ -442,6 +468,8 @@ class TestHandlerCase(unittest.TestCase):
                          'HTTP Status code not 500')
 
     def test_app_missing_env_table(self):
+        self.print_environment()
+
         from modify_resource import app
         _event = {
             Constants.EVENT_HTTP_METHOD: Constants.HTTP_METHOD_POST,
