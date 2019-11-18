@@ -66,6 +66,8 @@ class TestHandlerCase(unittest.TestCase):
         os.environ['AWS_SESSION_TOKEN'] = 'testing'
         os.environ[Constants.ENV_VAR_TABLE_NAME] = 'testing'
         os.environ[Constants.ENV_VAR_REGION] = 'eu-west-1'
+        for param in os.environ.keys():
+            print("%20s %s" % (param, os.environ[param]))
 
     def tearDown(self):
         pass
