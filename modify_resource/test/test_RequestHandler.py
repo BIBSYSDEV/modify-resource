@@ -385,14 +385,14 @@ class TestHandlerCase(unittest.TestCase):
                          'HTTP Status code not 400')
         remove_mock_database(dynamodb)
 
+    @mock_dynamodb2
     @mock.patch.dict(os.environ, {'REGION': 'eu-west-1'})
     @mock.patch.dict(os.environ, {'TABLE_NAME': 'testing'})
     def test_handler_missing_event(self):
-        from modify_resource.main.RequestHandler import RequestHandler
+        from modify_resource import app
         dynamodb = self.setup_mock_database('eu-west-1',
                                             'testing')
-        request_handler = RequestHandler(dynamodb)
-        handler_modify_response = request_handler.handler(None, None)
+        handler_modify_response = app.handler(None, None)
         self.assertEqual(handler_modify_response[Constants.RESPONSE_STATUS_CODE], http.HTTPStatus.BAD_REQUEST,
                          'HTTP Status code not 400')
         remove_mock_database(dynamodb)
@@ -468,11 +468,11 @@ class TestHandlerCase(unittest.TestCase):
                          'Unexpected metadata')
         self.assertRaises(TypeError, encode_resource, '')
 
+    @mock_dynamodb2
     @mock.patch.dict(os.environ, {'REGION': 'eu-west-1'})
     @mock.patch.dict(os.environ, {'TABLE_NAME': 'testing'})
     def test_app(self):
         from modify_resource import app
-        self.assertRaises(ValueError, app.handler, None, None)
         event = {
             "body": "{}"
         }
