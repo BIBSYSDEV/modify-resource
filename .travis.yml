@@ -3,7 +3,7 @@ python:
   - 3.7
   - 3.8
 script:
-  - python3 -m unittest discover tests
+  - python3 -m unittest discover modify_resource/tests
   - pip3 install coverage
   - coverage run --source common setup.py test
   - coverage xml
