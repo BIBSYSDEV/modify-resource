@@ -31,5 +31,3 @@ Resources:
           Properties:
             Path: /{id}
             Method: PUT
-      Environment:
-        Variables:
