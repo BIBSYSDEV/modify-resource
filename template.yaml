@@ -35,7 +35,6 @@ Resources:
             UserPoolArn: !Ref CognitoAuthorizerArn
 
 
-
   ModifyResource:
     Type: AWS::Serverless::Function
     Properties:
