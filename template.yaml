@@ -48,10 +48,10 @@ Resources:
             Path: /{id}
             Method: PUT
             RestApiId: !Ref ModifyResourceApi
-        Environment:
-          Variables:
-            TABLE_NAME: !Ref ResourceTable
-            REGION: !Ref AWS::Region
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref ResourceTable
+          REGION: !Ref AWS::Region
 
 Outputs:
   FetchResourceApiName:
