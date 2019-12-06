@@ -3,6 +3,7 @@ python:
   - 3.7
   - 3.8
 script:
+  - pip install -r modify_resource/requirements.txt
   - python3 -m unittest discover modify_resource/test
   - pip3 install coverage
   - coverage run --source common setup.py test
