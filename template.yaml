@@ -10,8 +10,8 @@ Metadata:
     SpdxLicenseId: MIT
     LicenseUrl: LICENSE
     ReadmeUrl: README.md
-    HomePageUrl: https://github.com/BIBSYSDEV/data-persistence
-    SourceCodeUrl: https://github.com/BIBSYSDEV/data-persistence
+    HomePageUrl: https://github.com/BIBSYSDEV/modify-resource
+    SourceCodeUrl: https://github.com/BIBSYSDEV/modify-resource
 
 Parameters:
   ResourceTable:
