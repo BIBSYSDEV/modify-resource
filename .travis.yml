@@ -3,10 +3,10 @@ python:
   - 3.7
   - 3.8
 script:
-  - pip install -r modify_resource/requirements.txt
+  - pip3 install -r modify_resource/requirements.txt
   - python3 -m unittest discover modify_resource/test
   - pip3 install coverage
-  - coverage run --source common setup.py test
+  - python3 -m coverage run --source=./modify_resource/test/ -m unittest discover
   - coverage xml
   - pip3 install codacy-coverage
   - python-codacy-coverage -r coverage.xml
