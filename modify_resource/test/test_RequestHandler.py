@@ -14,7 +14,7 @@ from boto3.dynamodb.conditions import Key
 from moto import mock_dynamodb2
 
 from common.constants import Constants
-from common.encoders import encode_resource, encode_file_metadata, encode_files, encode_creator, encode_metadata
+from common.encoders import encode_resource
 from common.helpers import remove_none_values
 from data.creator import Creator
 from data.file import File
@@ -61,7 +61,11 @@ class TestHandlerCase(unittest.TestCase):
     EXISTING_RESOURCE_IDENTIFIER_MISSING_CREATED_DATE = 'acf20333-35a5-4a06-9c58-68ea688a9a9c'
 
     def setUp(self):
-        pass
+        """Mocked AWS Credentials for moto."""
+        os.environ['AWS_ACCESS_KEY_ID'] = 'testing'
+        os.environ['AWS_SECRET_ACCESS_KEY'] = 'testing'
+        os.environ['AWS_SECURITY_TOKEN'] = 'testing'
+        os.environ['AWS_SESSION_TOKEN'] = 'testing'
 
     def tearDown(self):
         pass
