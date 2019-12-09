@@ -457,17 +457,6 @@ class TestHandlerCase(unittest.TestCase):
                             'Value not persisted as expected')
         remove_mock_database(dynamodb)
 
-    @mock.patch.dict(os.environ, {'REGION': 'eu-west-1'})
-    @mock.patch.dict(os.environ, {'TABLE_NAME': 'testing'})
-    def test_encoders(self):
-        self.assertRaises(TypeError, encode_file_metadata, '')
-        self.assertRaises(TypeError, encode_files, '')
-        self.assertRaises(TypeError, encode_creator, '')
-        self.assertRaises(TypeError, encode_metadata, '')
-        self.assertEqual(encode_metadata(Metadata(None, None, None, None, None, dict(), None)), {},
-                         'Unexpected metadata')
-        self.assertRaises(TypeError, encode_resource, '')
-
     @mock_dynamodb2
     @mock.patch.dict(os.environ, {'REGION': 'eu-west-1'})
     @mock.patch.dict(os.environ, {'TABLE_NAME': 'testing'})
