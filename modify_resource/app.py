@@ -7,7 +7,6 @@ from common.helpers import response
 
 from main.RequestHandler import RequestHandler
 
-
 _dynamodb = None
 
 
@@ -32,3 +31,7 @@ def handler(event, context):
     except Exception as e:
         return response(http.HTTPStatus.INTERNAL_SERVER_ERROR, e.args[0])
     return request_handler.handler(event, context)
+
+
+def clear_dynamodb():
+    globals()['_dynamodb'] = None

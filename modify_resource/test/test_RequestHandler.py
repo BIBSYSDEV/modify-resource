@@ -389,7 +389,6 @@ class TestHandlerCase(unittest.TestCase):
                          'HTTP Status code not 400')
         remove_mock_database(dynamodb)
 
-    @mock_dynamodb2
     @mock.patch.dict(os.environ, {'REGION': 'eu-west-1'})
     @mock.patch.dict(os.environ, {'TABLE_NAME': 'testing'})
     def test_handler_missing_event(self):
@@ -461,7 +460,6 @@ class TestHandlerCase(unittest.TestCase):
                             'Value not persisted as expected')
         remove_mock_database(dynamodb)
 
-    @mock_dynamodb2
     @mock.patch.dict(os.environ, {'REGION': 'eu-west-1'})
     @mock.patch.dict(os.environ, {'TABLE_NAME': 'testing'})
     def test_app(self):
@@ -473,7 +471,6 @@ class TestHandlerCase(unittest.TestCase):
         self.assertEqual(handler_response[Constants.RESPONSE_STATUS_CODE], http.HTTPStatus.BAD_REQUEST,
                          'HTTP Status code not 400')
 
-    @mock_dynamodb2
     @mock.patch.dict(os.environ, {'REGION': 'eu-west-1'})
     @mock.patch.dict(os.environ, {'TABLE_NAME': 'testing'})
     def test_app_event_empty_body(self):
@@ -488,14 +485,24 @@ class TestHandlerCase(unittest.TestCase):
 
     @mock.patch.dict(os.environ, {'REGION': 'eu-west-1'})
     @mock.patch.dict(os.environ, {'TABLE_NAME': 'testing'})
+    def test_app_event_invalid_json_in_body(self):
+        from modify_resource import app
+        event = {
+            "httpMethod": "PUT",
+            "body": "{'test': 'test }"
+        }
+        handler_response = app.handler(event, None)
+        self.assertEqual(handler_response[Constants.RESPONSE_STATUS_CODE], http.HTTPStatus.BAD_REQUEST,
+                         'HTTP Status code not 400')
+
+    @mock.patch.dict(os.environ, {'REGION': 'eu-west-1'})
+    @mock.patch.dict(os.environ, {'TABLE_NAME': 'testing'})
     def test_app_missing_env_region(self):
         del os.environ['REGION']
         from modify_resource import app
-        _event = {
-            Constants.EVENT_HTTP_METHOD: Constants.HTTP_METHOD_POST,
-            "body": "{\"resource\": {}} "
-        }
-
+        app.clear_dynamodb()
+        resource = self.generate_mock_resource(None, None, self.EXISTING_RESOURCE_IDENTIFIER)
+        _event = generate_mock_event(Constants.HTTP_METHOD_PUT, resource)
         _handler_response = app.handler(_event, None)
         self.assertEqual(_handler_response[Constants.RESPONSE_STATUS_CODE], http.HTTPStatus.INTERNAL_SERVER_ERROR,
                          'HTTP Status code not 500')
@@ -505,10 +512,9 @@ class TestHandlerCase(unittest.TestCase):
     def test_app_missing_env_table(self):
         del os.environ['TABLE_NAME']
         from modify_resource import app
-        _event = {
-            Constants.EVENT_HTTP_METHOD: Constants.HTTP_METHOD_POST,
-            "body": "{\"resource\": {}} "
-        }
+        app.clear_dynamodb()
+        resource = self.generate_mock_resource(None, None, self.EXISTING_RESOURCE_IDENTIFIER)
+        _event = generate_mock_event(Constants.HTTP_METHOD_PUT, resource)
 
         _handler_response = app.handler(_event, None)
         self.assertEqual(_handler_response[Constants.RESPONSE_STATUS_CODE], http.HTTPStatus.INTERNAL_SERVER_ERROR,
