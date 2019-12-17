@@ -16,6 +16,8 @@ def handler(event, context):
         return response(http.HTTPStatus.BAD_REQUEST, Constants.ERROR_INSUFFICIENT_PARAMETERS)
     if event is None or Constants.EVENT_BODY not in event or Constants.EVENT_HTTP_METHOD not in event:
         return response(http.HTTPStatus.BAD_REQUEST, Constants.ERROR_INSUFFICIENT_PARAMETERS)
+    if event[Constants.EVENT_BODY] is None or len(event[Constants.EVENT_BODY]) is 0:
+        return response(http.HTTPStatus.BAD_REQUEST, Constants.ERROR_INSUFFICIENT_PARAMETERS)
 
     global _dynamodb
     if _dynamodb is None:

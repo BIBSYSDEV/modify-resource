@@ -473,6 +473,19 @@ class TestHandlerCase(unittest.TestCase):
         self.assertEqual(handler_response[Constants.RESPONSE_STATUS_CODE], http.HTTPStatus.BAD_REQUEST,
                          'HTTP Status code not 400')
 
+    @mock_dynamodb2
+    @mock.patch.dict(os.environ, {'REGION': 'eu-west-1'})
+    @mock.patch.dict(os.environ, {'TABLE_NAME': 'testing'})
+    def test_app_event_empty_body(self):
+        from modify_resource import app
+        event = {
+            "httpMethod": "PUT",
+            "body": ""
+        }
+        handler_response = app.handler(event, None)
+        self.assertEqual(handler_response[Constants.RESPONSE_STATUS_CODE], http.HTTPStatus.BAD_REQUEST,
+                         'HTTP Status code not 400')
+
     @mock.patch.dict(os.environ, {'REGION': 'eu-west-1'})
     @mock.patch.dict(os.environ, {'TABLE_NAME': 'testing'})
     def test_app_missing_env_region(self):
