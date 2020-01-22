@@ -7,6 +7,7 @@ import arrow as arrow
 from boto3.dynamodb.conditions import Key
 from boto3_type_annotations.dynamodb import Table
 from common.constants import Constants
+from common.http_constants import HttpConstants
 from common.helpers import response
 from common.validator import validate_resource_modify
 from data.resource import Resource
@@ -68,7 +69,7 @@ class RequestHandler:
         current_time = arrow.utcnow().isoformat()
 
         resource_not_none = resource is not None
-        if http_method == Constants.HTTP_METHOD_PUT and resource_not_none:
+        if http_method == HttpConstants.HTTP_METHOD_PUT and resource_not_none:
             try:
                 validate_resource_modify(resource)
                 ddb_response = self.modify_resource(current_time, resource)
