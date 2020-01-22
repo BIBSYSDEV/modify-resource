@@ -35,7 +35,6 @@ Resources:
     Properties:
       StageName: Prod
       Auth:
-        DefaultAuthorizer: MyCognitoAuthorizer
         Authorizers:
           MyCognitoAuthorizer:
             UserPoolArn: !Ref CognitoAuthorizerArn
@@ -54,6 +53,8 @@ Resources:
         PutEvent:
           Type: Api
           Properties:
+            Auth:
+              Authorizer: MyCognitoAuthorizer
             Path: /{id}
             Method: PUT
             RestApiId: !Ref ModifyResourceApi
